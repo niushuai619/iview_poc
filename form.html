@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>iview example</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <style type="text/css">
+        .layout{
+            border: 1px solid #d7dde4;
+            background: #f5f7f9;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .layout-logo{
+            width: 100px;
+            height: 30px;
+            border-radius: 3px;
+            float: left;
+            position: relative;
+            top: 15px;
+            left: 20px;
+        }
+        .layout img{
+            height: 30px;
+        }
+        .layout-nav{
+            width: 420px;
+            margin: 0 auto;
+            margin-left: 205px;
+        }
+        .layout-right{
+            width: 150px;
+            margin: 0 auto;
+            margin-right: 0px;
+        }
+</style>
+</head>
+<body>
+<div id="app">
+
+
+    <template>
+
+        <div class="layout">
+            <Layout>
+                <Header>
+                    <i-menu mode="horizontal" theme="light" active-name="1">
+                        <div class="layout-logo">默认控台</div>
+                        <div class="layout-nav">
+                            <menu-item name="1">
+                                <Icon type="ios-navigate"></Icon>
+                                主页
+                            </menu-item>
+                            <menu-item name="2">
+                                <Icon type="ios-keypad"></Icon>
+                                文章
+                            </menu-item>
+                            <menu-item name="3">
+                                <Icon type="ios-analytics"></Icon>
+                                系统管理
+                            </menu-item>
+                            <menu-item name="4">
+                                <Icon type="ios-paper"></Icon>
+                                菜单2
+                            </menu-item>
+                        </div>
+                        <div class="layout-right">
+                                <avatar style="background: #7265e6;margin-right:20px">admin</avatar>
+                                <Dropdown>
+                                        <a href="javascript:void(0)">
+                                            admin<Icon type="ios-arrow-down"></Icon>
+                                        </a>
+                                        <dropdown-menu slot="list">
+                                                <dropdown-item>
+                                                    <Icon type="ios-settings"></Icon> 系统设置
+                                                </dropdown-item>
+                                                <dropdown-item>
+                                                    <Icon type="ios-power"></Icon> 退出
+                                                </dropdown-item>
+                                        </dropdown-menu>
+                                </Dropdown>
+                        </div>
+                    </i-menu>
+             
+                </Header>
+                <Layout>
+                    <Sider hide-trigger :style="{background: '#fff'}">
+                        <i-menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+                            <Submenu name="1">
+                                <template slot="title">
+                                    <Icon type="ios-navigate"></Icon>
+                                    主页
+                                </template>
+                                <menu-item name="1-1">菜单一</menu-item>
+                                <menu-item name="1-2">菜单一</menu-item>
+                                <menu-item name="1-3">菜单一</menu-item>
+                            </Submenu>
+                            <Submenu name="2">
+                                <template slot="title">
+                                    <Icon type="ios-keypad"></Icon>
+                                    Item 2
+                                </template>
+                                <menu-item name="2-1">Option 1</menu-item>
+                                <menu-item name="2-2">Option 2</menu-item>
+                            </Submenu>
+                            <Submenu name="3">
+                                <template slot="title">
+                                    <Icon type="ios-analytics"></Icon>
+                                    Item 3
+                                </template>
+                                <menu-item name="3-1">Option 1</menu-item>
+                                <menu-item name="3-2">Option 2</menu-item>
+                            </Submenu>
+                        </i-menu>
+                    </Sider>
+                    <Layout :style="{padding: '0 24px 24px'}">
+                        <Breadcrumb :style="{margin: '24px 0'}">
+                            <breadcrumb-item>主页</breadcrumb-item>
+                            <breadcrumb-item>组件</breadcrumb-item>
+                            <breadcrumb-item>布局</breadcrumb-item>
+                        </Breadcrumb>
+                        <Content :style="{padding: '24px', minHeight: '450px', background: '#fff'}">
+                               
+                                <template>
+                                    <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
+                                        <form-item label="姓名" prop="name">
+                                            <i-input v-model="formValidate.name" placeholder="姓名"></i-input>
+                                        </form-item>
+                                        <form-item label="邮箱" prop="email">
+                                            <i-input v-model="formValidate.mail" placeholder="邮箱"></i-input>
+                                        </form-item>
+                                        <form-item label="城市" prop="city">
+                                            <i-select v-model="formValidate.city" placeholder="选择城市">
+                                                <i-option value="beijing">郑州</i-option>
+                                                <i-option value="shanghai">洛阳</i-option>
+                                                <i-option value="shenzhen">三门峡</i-option>
+                                            </i-select>
+                                        </form-item>
+                                        <form-item label="日期">
+                                            <Row>
+                                                <Col span="11">
+                                                    <form-item prop="date">
+                                                        <date-picker type="date" placeholder="日期" v-model="formValidate.date"></>
+                                                    </form-item>
+                                                </Col>
+                                                <Col span="2" style="text-align: center">-</Col>
+                                                <Col span="11">
+                                                    <form-item prop="time">
+                                                        <time-picker type="time" placeholder="时间" v-model="formValidate.time"></>
+                                                    </form-item>
+                                                </Col>
+                                            </Row>
+                                        </form-item>
+                                        <form-item label="性别" prop="gender">
+                                            <radio-group v-model="formValidate.gender">
+                                                <radio label="1">男</radio>
+                                                <radio label="2">女</radio>
+                                            </radio-group>
+                                        </form-item>
+                                        <form-item label="爱好" prop="interest">
+                                            <checkbox-group v-model="formValidate.interest">
+                                                <checkbox label="吃"></checkbox>
+                                                <checkbox label="睡"></checkbox>
+                                                <checkbox label="跑步"></checkbox>
+                                                <checkbox label="电影"></checkbox>
+                                            </checkbox-group>
+                                        </form-item>
+                                        <form-item label="描述" prop="desc">
+                                            <i-input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入"></i-input>
+                                        </form-item>
+                                        <form-item>
+                                            <i-button type="primary" @click="handleSubmit('formValidate')">保存</i-button>
+                                            <i-button @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+                                        </form-item>
+                                    </i-form>
+                            </template>
+                                   
+                        </Content>
+                    </Layout>
+                </Layout>
+            </Layout>
+        </div>
+    </template>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            formValidate: {
+                name: '',
+                mail: '',
+                city: '',
+                gender: '',
+                interest: [],
+                date: '',
+                time: '',
+                desc: ''
+            },
+            ruleValidate: {
+                name: [
+                    { required: true, trigger: 'blur' }
+                ],
+                mail: [
+                    { required: true, trigger: 'blur' },
+                    { type: 'email',  trigger: 'blur' }
+                ],
+                city: [
+                    { required: true, trigger: 'change' }
+                ],
+                gender: [
+                    { required: true,  trigger: 'change' }
+                ],
+                interest: [
+                    { required: true, type: 'array', min: 1, trigger: 'change' },
+                    { type: 'array', max: 2,  trigger: 'change' }
+                ],
+                date: [
+                    { required: true, type: 'date', trigger: 'change' }
+                ],
+                time: [
+                    { required: true, type: 'string', trigger: 'change' }
+                ],
+                desc: [
+                    { required: true, trigger: 'blur' },
+                    { type: 'string', min: 20, trigger: 'blur' }
+                ]
+            }
+                
+        },
+        methods: {
+            handleSubmit (name) {
+                    this.$refs[name].validate((valid) => {
+                        if (valid) {
+                            this.$Message.success('Success!');
+                        } else {
+                            this.$Message.error('Fail!');
+                        }
+                    })
+                },
+            handleReset (name) {
+                this.$refs[name].resetFields();
+            }
+        }
+    })
+</script>
+
+
+
+</body>
+</html>
